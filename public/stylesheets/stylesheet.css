@@ -1,0 +1,938 @@
+* {
+    margin: 0;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+a {
+    margin: 0;
+    text-decoration: none;
+}
+.pinAppStyle{
+    color: #b52519;
+    /* color: white; */
+    font-family: 'Pacifico', cursive;
+}
+main {
+    width: 100vw;
+    height: 100vh;
+    /* background-color: #FAF4E4; */
+    color: #2a2a2a;
+    /* color: #5DA6AE; */
+}
+
+body {
+    /* font: 14px "Helvetica"; */
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0px;
+    text-align: center;
+    justify-content: center;
+}
+
+.titleFonts {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    /* color: rgb(255, 5, 5); */
+    color: #f20909;
+}
+
+.simpleText {
+    color: lightgrey;
+    /* font-family: 'Cutive Mono', monospace; */
+    /* font-family: "Helvetica", monospace; */
+    font-weight: 100;
+}
+
+/* ********* Welcome Container ************* */
+
+.welcomeContainer {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    color: white;
+
+}
+.welcomeContainer h1{
+    font-family: 'Pacifico', cursive;
+    text-shadow: 2px 2px 12px black;
+    padding: 2vh;
+}
+.welcomePageLogoImg {
+    height: 33vh;
+    padding-top: 5vh;
+    /* padding-bottom: 5vh; */
+}
+
+/* ********* Route Container ************* */
+
+.routeContainer {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-size: auto 100%;
+    background-repeat: cover;
+    background-repeat: no-repeat;
+    justify-items: center;
+    align-items: center;
+}
+
+/* ********* App Container ************* */
+
+.appContainer {
+    width: 100vw;
+    height: 100vh;
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+/************NAVIGATION*****************/
+
+.navigationContainer {
+    width: 100vw;
+    min-height: 10vh;
+    /* padding: 20px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: lightgrey;
+    /* background-color: #51B3C4; */
+    background-color: #0e0d0d;
+    /* font-family: 'Cutive Mono', monospace; */
+    font-weight: 100;
+    position: relative;
+    z-index: 8;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+}
+
+.navigationIconBar {
+    /* padding: 20px; */
+    margin: 0 10px;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    /* font-family: 'Cutive Mono', monospace; */
+    font-weight: 100;
+}
+
+.navigationIconBar a {
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-content: center;
+}
+
+.navigationBarRight {
+    display: flex;
+    align-items: center;
+}
+
+.navigationIcon {
+    height: 9vh;
+    max-height: 53px;
+    margin-top: 2px;
+    margin-right: 5px;
+}
+
+.navigationIconProfilepicCircle {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    height: 9vh;
+    width: 9vh;
+    max-width: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    margin: 0 2vh;
+    border-radius: 50%;
+    background-size: contain;
+}
+
+.navigationIconProfilepic {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    height: 9vh;
+    max-height: 40px;
+}
+
+.navigationIconProfilepic img {
+    height: 43px;
+    width: 43px;
+}
+
+.navigationIconProfilepic:hover {
+    cursor: pointer;
+}
+
+.logoIconMenu {
+    margin: 1vh;
+    max-height: 9vh;
+    position: fixed;
+    top: -.2vh;
+}
+
+.logoIconMenu:hover {
+    cursor: pointer;
+}
+
+.navigationIcon:hover {
+    cursor: pointer;
+}
+
+.logoBig {
+    max-width: 25%;
+    padding: 20px;
+}
+
+/* ********* MAP ************* */
+
+.mapContainer {
+    animation: 3s ease-in;
+    width: 98vw;
+    height: 88vh;
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    position: absolute;
+    top: 10vh;
+    /* background-color: grey; */
+}
+
+/* .mapContainerUp {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+} */
+
+.mapContainerDown {
+    width: 100%;
+    height: 88vh;
+    /* background-color: orange; */
+    /* margin: 10px 10px; */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* flex-direction: column; */
+    /* align-items: center; */
+}
+
+.mapContainerLeft {
+    /* background-color: yellow; */
+    /* height: 70%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.categoryList {
+    width: 25vw;
+    /* height: 50vh; */
+    /* background-color: green; */
+    margin: 10px;
+    /* box-shadow: 2px 2px 2px rgba(0,0,0,0.2); */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categoryItem {
+    /* background-color: black; */
+    /* width: 90%; */
+    /* height: 30px; */
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.categoryItemPinIcon {
+    max-width: 20px;
+    height: auto;
+    padding: 0 10px;
+}
+
+.categoryItemPinIcon:hover {
+    cursor: pointer;
+}
+
+.categoryItemText {
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+}
+
+.mapContainerRight {
+    min-width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 5vw;
+    position: relative;
+}
+
+.mapContainerRightUP {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mapContainerRightDOWN {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    /* background-color: black; */
+    height: 100%;
+    width: 100%;
+
+    min-height: 50vh;
+    min-width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.mapArea {
+    /* backgroun d-image: url('/map.png'); */
+    background-size: contain;
+    border-radius: 2px;
+    border: 2px solid #eaeced;
+    box-shadow: 2px 2px 7px -2px rgba(0, 0, 0, 0.4);
+    height: 80%;
+    width: 100%;
+    overflow: hidden;
+    /* position: relative; */
+    position: absolute;
+}
+
+/********** USER PROFILE (OtherProfile) ***************/
+
+.profileContainerUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    padding: 20px;
+    position: relative;
+    width: 100vw;
+    height: 90vh;
+}
+
+.mapContainerUser {
+    width: 100%;
+    height: 58%;
+    margin: 10px 10px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-items: center;
+    align-items: center;
+    position: relative;
+    /* background-color: grey; */
+}
+
+.mapContainerUserLeft {
+    /* width: 30%; */
+    padding-left: 1vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.categoryListUSer {
+    width: 25vw;
+    height: 50vh;
+    /* background-color: green; */
+    margin: 10px;
+    /* box-shadow: 2px 2px 2px rgba(0,0,0,0.2); */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mapContainerUserRight {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mapAreaUser {
+    /* background-image: url('/map.png'); */
+    background-size: contain;
+    /* background-color: pink; */
+    border-radius: 3px;
+    box-shadow: 2px 2px 7px -2px rgba(0, 0, 0, 0.4);
+    height: 80%;
+    width: 80%;
+    position: relative;
+}
+
+.infoContainerUser {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    padding-left: 20vh;
+    width: 100%;
+    /* height: 20%; */
+}
+
+.profilePicUser {
+    width:20vh;
+    height: 20vh;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profilePicUser img {
+    max-width: 150px;
+    height: auto;
+}
+
+.nameAndBioContainerUser {
+    position: relative;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    padding: 20px;
+}
+
+.nameUser {
+    padding: 10px;
+}
+
+.bioUser {
+    padding: 10px;
+    font-style: italic;
+    font-family: cursive;
+    color: #2a2a2a;
+}
+
+/********** EDIT PROFILE  ***********/
+
+.profilePageContainer {
+    width: 100vw;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profilePageContainerLeft {
+    width: 30%;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+.profilePicFrame {
+    display: flex;
+    position: relative;
+}
+
+.profilePicOwn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 9px;
+}
+
+.profilePicCircle {
+    width: 20vw;
+    height: 20vw;
+    max-width: 180px;
+    max-height: 180px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 1);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.profilePageContainerRight {
+    /* width: 50%; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 20px;
+}
+
+.profileInfoContainer {
+    font-size: 0.9em;
+    height: 30vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.existingValues, .editingValues {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid grey;
+    /* box-shadow: -1px 1px 20px 9px rgba(137, 150, 208, .2); */
+}
+
+.profileInputField {
+    display: grid;
+    grid-template-columns: 20vh 20vh;
+    justify-items: start;
+    padding: 3px;
+    /* border: 1px solid grey; */
+}
+
+.inputPropertyName {
+    padding: 3px;
+}
+
+.inputPropertyValue {
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+}
+
+.editBioTextArea {
+    width: 90%;
+    height: 50px;
+    border: 0.5px solid lightgrey;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow: auto;
+    resize: none;
+    outline: none;
+}
+
+.editButtons {
+    width: 100px;
+    display: flex;
+}
+
+.profilePic img {
+    max-width: 200px;
+    max-height: 200px;
+    padding: 10px;
+}
+
+.profilePicButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/******* DROPDOWN MENU CONTAINER ****************/
+
+#overley {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0px;
+    right: 0px;
+    z-index: 8;
+}
+
+.dropDownMenu {
+    position: absolute;
+    padding: 1vw;
+    /* min-height: 10vh; */
+    width: 9vw;
+    min-width: 120px;
+    top: 10vh;
+    right: 0vw;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid grey;
+    /* margin: 20px; */
+    border-radius: 2px;
+    flex-direction: column;
+    align-items: center;
+    z-index: 13;
+    transition: opacity 2s ease-in;
+    /* animation: dropDownMenu 0.3s; */
+}
+
+/************ FORM ***************/
+
+.form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: "Cutive Mono", monospace;
+}
+
+.form input {
+    display: block;
+    padding: 8px;
+    border-radius: 2px;
+    font-size: 14px;
+    justify-self: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+.welcomeForm {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    /* padding: 20px; */
+    font-family: "Cutive Mono", monospace;
+}
+
+.welcomeForm input {
+    display: block;
+    padding: 4px;
+    border-radius: 2px;
+    font-size: 14px;
+    justify-self: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+/* ******************** namseToShow component ******************** */
+
+.searchUsers {
+    min-height: 4vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 10vw;
+    z-index: 1;
+}
+
+.theNamesToShowInSearch {
+    font-size: 0.9em;
+    text-decoration: none;
+    font-weight: 400;
+    color: rgb(71, 170, 188);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+#searchUsersBox>textarea {
+    color: #666;
+    border-radius: 2px;
+    margin: 2px;
+    max-width: 6vw;
+    border: #999 1px solid;
+    overflow: auto;
+    resize: none;
+    height: 2vh;
+    z-index: 1;
+}
+
+#searchUsersBox>textarea:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+#searchUsersBox::placeholder {}
+
+#searchUsers {
+    color: black;
+    z-index: 1;
+    font-weight: 900;
+}
+
+/* ******************** droping pin component ******************** */
+
+
+.uploadedImage {
+    max-width: 100%;
+    height: auto;
+}
+
+.profileHiddenInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+/* ********** map component ********** */
+
+.markerInput {
+    position: absolute;
+    top: 30vh;
+    right: 15vw;
+    width: 10vw;
+    height: 15vh;
+    border: 1px solid black;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile+label {
+    font-size: 2vw;
+    font-weight: 700;
+    color: black;
+    cursor: pointer;
+    width: 100%;
+}
+
+.inputfile:focus+label, .inputfile+label:hover {
+    color: red;
+}
+
+.inputfile:focus+label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile+label * {
+    pointer-events: none;
+}
+
+.dropDownMenuItem {
+    color: #2a2a2a;
+    padding: 5px;
+    font-weight: 900;
+}
+
+.dropDownMenuItem:hover {
+    color: #51B3C4;
+    cursor: pointer;
+}
+
+/* ************ animation ************ */
+
+/* @keyframes dropDownMenu {
+    from {
+        top: 10vh;
+        z-index: 1;
+    }
+    to {
+        top: 20vh;
+        z-index: 13;
+    }
+} */
+
+/*
+@keyframes dropDownMenuOut {
+    from {
+        top: 10px;
+    }
+    to {
+        top: -20vh;
+    }
+} */
+
+/************ BUTTONS ***************/
+
+.inputButton {
+    width: 162px;
+    justify-content: center;
+}
+.pinAppButton{
+    background-color: #b52519;
+    color: white;
+    font-family: 'Pacifico', cursive;
+    border-radius: 30px;
+    font-size: 1.1em;
+    box-shadow: inset -20px 0px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.pinAppButton:hover{
+    background-color: black;
+    background-color: #b52519;
+}
+.roundButton{
+    border-radius: 50%;
+    height: 10vh;
+    width: 10vh;
+
+}
+.dropPinButton{
+    position: absolute;
+    z-index: 1;
+    opacity: 0.7;
+    /* transform: translate(-50%,-50%); */
+}
+.dropPinButton:hover{
+    opacity: 0.9;
+}
+.infoText{
+    font-size: 0.9em;
+    font-style: italic;
+    color: grey;
+    padding-bottom: 2vh;
+    /* font-family:inherit; */
+}
+button {
+    display: block;
+    color: #929A9F;
+    font-size: 1.1em;
+    /* border: 2px solid #f6f6f6; */
+    border-radius: 2px;
+    margin: 10px;
+    /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); */
+    /* font-family: "Cutive Mono", monospace; */
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #eaeced;
+    /* background-color: #f6f6f6; */
+}
+
+.centerStuff {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.subtleButton {
+    border: none;
+    min-width: 60px;
+    /* height: 10px; */
+    font-size: 0.9em;
+    display: inline;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.editButtons {
+    width: 100px;
+    display: flex;
+}
+
+.inARow {
+    display: flex;
+}
+
+.error, .errMsg {
+    color: red;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.logo {
+    justify-self: flex-start;
+    top: 10px;
+    left: 10px;
+}
+
+.userImage {
+    overflow: hidden;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.icons {
+    height: 20px;
+    width: 20px;
+    padding: 10px;
+}
+
+.icons:hover {
+    cursor: pointer;
+}
+
+.editIcon {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    opacity: 0.2;
+}
+
+.editIcon:hover {
+    opacity: 0.8;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centerText {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#popupShare {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 2px 1px 1px #dcd5d5;
+    height: 20vh;
+    width: 13vw;
+    top: 10vh;
+    left: 0vw;
+    background-color: white;
+    z-index: 1;
+    animation: aaron 2s;
+}
+
+#popupShare>button {
+    z-index: 12345;
+}
+
+@keyframes aaron {
+    0% {
+        top: -10vh;
+    }
+    100% {
+        top: 10vh;
+    }
+}

@@ -1,0 +1,439 @@
+
+
+.existingWebPage {
+    width: 90vw;
+    height: 90vh;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.blackVail {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8;
+}
+.blackVailDelete {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 6;
+}
+/* ******** PINCLICK  *********/
+
+.pinClickContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+.fieldsContainerPinClick {
+
+    display: grid;
+    grid-template-rows: 15% 50% 20% 15%;
+    grid-template-columns: 1fr;
+    /* position: relative; */
+    z-index: 10;
+}
+.secondRowPinClick {
+    width: 90%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.thirdRowPinClick{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+.boxPinClick{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:  10px;
+    max-width: 30vw;
+    /* width: 90%;
+    height: 90%; */
+    overflow: hidden;
+}
+.textFieldsPinClick{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.mapContainerPinClick img{
+    width: 90%;
+    height: 90%;
+    background-color: rgba(254, 228, 241, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
+    position: relative;
+
+}
+.overlayPin{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 12;
+    /* background-color: purple; */
+}
+.colPinClick{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.galleryItemsContainer{
+    width: 90%;
+    height: 90%;
+    /* background-color: rgba(254, 228, 241, 1); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 1);
+    position: relative;
+    background-color: #101010;
+    background-repeat: no-repeat;
+    background-position:center center;
+    background-size: contain;
+    /* background-size: cover; */
+    overflow: hidden;
+}
+
+.galleryItemsContainer label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size:cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+.cameraIconContainerPinClick{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(254, 228, 241, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    background-size:cover;
+    overflow: hidden;
+}
+.existingPhoto{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.uploadedImagePinclick{
+    background-position:
+    center center;
+    width:100%;
+    position: absolute;
+}
+.pinImageContainer{
+    width: 20vw;
+    height: 20vh;
+    overflow: hidden;
+}
+.addPinPicturePinClick {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.titleTextareaPinClick {
+    border-radius: 6px;
+    width: 85%;
+    background-color: whitesmoke;
+    resize: none;
+}
+.descriptionTextareaPinClick {
+    border-radius: 6px;
+    width: 85%;
+    background-color: whitesmoke;
+}
+.shareButtons{
+    width: 50px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    border-radius: 6px;
+}
+.shareButtons:hover{
+    cursor: pointer;
+}
+.removePin{
+    content:'lalala';
+}
+.removePin:hover{
+    color: red;
+    content: 'NEWttgg';
+}
+/* ******** newPinContainer  *********/
+.newPinContainer {
+    width: 100vw;
+    height: 100vh;
+    /* color: white; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    animation: fadein 1s;
+    z-index: 10;
+}
+
+/* @keyframes slidein {
+    from {
+        margin-top: 100%;
+        width: 300%;
+    }
+    to {
+        margin-top: 0%;
+        width: 100%;
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes infinite-spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+} */
+.fieldsContainer{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-width: 70vw;
+    min-height: 70vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+    box-shadow: 2px 2px 35px -5px black;
+    top: 0;
+    z-index: 10;
+}
+.fieldsContainerNewPin {
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+    grid-template-columns: 1fr;
+    position: relative;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    /*  THIS IS NEW - it used to be center!*/
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.pinTitle {
+    font-family: 'Pacifico', cursive;
+    /* font-size: 25px; */
+    width: 100%;
+    z-index: 1;
+}
+.pinTitle img {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    padding-right: 20px;
+    max-width: 25%;
+    /* max-width: 130px; */
+    /* top: -45%;
+    left: 15%; */
+}
+.pinOptions{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    justify-items: center;
+}
+.addPinTitle {
+    margin-left: 40px;
+    font-size: 5vw;
+    font-family: 'Pacifico', cursive;
+}
+
+.pinMenu {
+    /* width: 50%; */
+    height: 100%;
+    position: relative;
+    left: 3vw;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.pinCategory {
+    display: flex;
+    color: whitesmoke;
+    height: 50px;
+    /* height: 5%; */
+}
+
+.pinCheckBox {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.pinText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5px;
+    font-size: 0.8em;
+}
+@media only screen and (max-width: 400px) {
+    .pinText{
+        display: none;
+    }
+}
+.addPinPicture {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cameraIconContainer {
+    /* width: 50%;
+    height: 50%; */
+    width: 25vh;
+    height: 25vh;
+    background-color: rgba(254, 228, 241, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
+}
+
+.titleTextarea {
+    border-radius: 6px;
+    width: 24vh;
+    background-color: whitesmoke;
+    margin: 10px;
+    resize: none;
+}
+
+.descriptionTextarea {
+    border-radius: 6px;
+    /* width: 47%; */
+    width: 24vh;
+    background-color: whitesmoke;
+}
+
+.pinEditSaveButtonArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.saveButton {
+    font-size: 1.2em;
+    margin: 20px;
+    font-family: 'Pacifico', cursive;
+}
+
+.saveButton:hover {
+    cursor: pointer;
+    margin: 20px;
+}
+
+.cameraIconContainer:hover {
+    cursor: pointer;
+}
+
+.pinIcon {
+    max-width: 25px;
+    height: auto;
+    padding-right: 10px;
+}
+
+.cameraIcon {
+    max-width: 50px;
+    height: auto;
+}
+
+.tickIcon {
+    max-width: 15px;
+    height: auto;
+    position: absolute;
+    padding-left: 15px;
+    top: 30%;
+}
+#exit {
+    position: absolute;
+    top: 18%;
+    right: 18%;
+    font-size: 2vw;
+    color: white;
+    cursor: pointer;
+    z-index: 5;
+    opacity: 0.6;
+}
+#exit:hover{
+    opacity: 1;
+}
