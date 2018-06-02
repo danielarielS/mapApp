@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 class OnlineUsers extends React.Component {
     render() {
         if (this.props.onlineUsers && this.props.onlineUsers.length > 0) {
-            console.log("this.props.onlineUsers  \n", this.props.onlineUsers);
             const onlineUsersList = this.props.onlineUsers.map((onlineUser) => {
                 var pic = onlineUser.profilepic || "/user.png";
                 return (

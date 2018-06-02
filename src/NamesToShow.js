@@ -18,7 +18,7 @@ export class NamesToShow extends React.Component {
                 .post("/userName", { name: this.name })
                 .then((response) => {
                     let arr = response.data.data;
-                    console.log("the post response", arr);
+
                     this.setState({ arrayOfNames: arr, showNames: true });
                 })
                 .catch((err) => {
@@ -79,7 +79,6 @@ function ListOfNames(props) {
     return (
         <div className="searchUsers">
             {props.names.map((item) => {
-                console.log(item.id);
                 if (item.id == props.id) {
                     return (
                         <Link

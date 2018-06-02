@@ -44,7 +44,7 @@ const conf = {
 if (require.main == module) {
     webpack(conf, function(err, info) {
         if (err) {
-            console.log(err);
+            console.log('err.....',err);
         }
         if (info && info.compilation.errors.length) {
             console.log(info.compilation.errors);

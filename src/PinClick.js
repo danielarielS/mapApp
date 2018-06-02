@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "./axios";
-import { deletePin } from "./actions";
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { deletePin, getAllPins } from "./actions";
 import { insertPinInfo, updatePinInfo } from "./actions";
 import { emit } from "./socket";
 
@@ -17,6 +18,7 @@ class PinClick extends React.Component {
             ready: null,
             removeButtonText: "X",
             editMode: false,
+            url: "",
             deleteAlertIsVisible: false
         };
         this.setFile = this.setFile.bind(this);
@@ -26,12 +28,32 @@ class PinClick extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.setFile = this.setFile.bind(this);
         this.deletePinAlert = this.deletePinAlert.bind(this);
+
+        this.togglePinClick = this.togglePinClick.bind(this);
+        this.exportPin = this.exportPin.bind(this);
+    }
+    exportPin() {
+        const encryptedPinId = window.btoa(this.props.pinId);
+        const pinUrl = `localhost:8080/pin/${encryptedPinId}`;
+        console.log(pinUrl);
+        this.setState({
+            pinUrl
+        });
+    }
+    togglePinClick() {
+        this.props.togglePinClick();
     }
     componentDidMount() {
+        // this is currently getting all pins. it needs to be readjusted to get the necessary ones!
+        this.props.dispatch(getAllPins());
         axios
-            .post("/PinClick", { pinId: this.props.pinId })
+            .post("/PinClick", {
+                pinId:
+                    this.props.pinId ||
+                    window.atob(this.props.match.params.encryptedPinId)
+            })
             .then((response) => {
-                console.log("in the mount of pinclick", response.data.pinInfo);
+                console.log("response.data", response.data);
                 this.setState({
                     title: response.data.pinInfo.title,
                     category: response.data.pinInfo.category,
@@ -45,9 +67,9 @@ class PinClick extends React.Component {
             .catch((err) => {
                 console.log(`error in PinClick componentDidMount: ${err}`);
             });
-        // console.log("this.state.ready....",this.state);
     }
     toggleEditMode(e) {
+        console.log(this.props);
         if (!this.state.editMode) {
             // this.insertPinInfo(e)
             this.setState({
@@ -102,8 +124,13 @@ class PinClick extends React.Component {
         };
         const formData = new FormData();
         formData.append("file", this.state.file);
-        this.props.dispatch(updatePinInfo({ formData, pinInfo }));
-        this.toggleEditMode();
+        if (this.state.file) {
+            this.props.dispatch(updatePinInfo({ formData, pinInfo }));
+            this.toggleEditMode();
+        } else {
+            this.props.dispatch(updatePinInfo({ pinInfo }));
+            this.toggleEditMode();
+        }
     }
     compileData(e) {
         this.setState(
@@ -124,29 +151,25 @@ class PinClick extends React.Component {
         );
     }
     deletePinAlert() {
-        console.log(this.props.pinId);
         this.setState({
             deleteAlertIsVisible: true
         });
 
         if (this.state.deleteAlertIsVisible == true) {
-            console.log("about to really delete pin");
-            console.log(this.props.pinId);
             this.props.dispatch(deletePin(this.props.pinId));
             this.setState({
                 deleteAlertIsVisible: false
             });
             this.props.togglePinClick();
         }
-        // console.log("this.state.deleteAlertIsVisible",this.state.deleteAlertIsVisible);
         // onClick={this.toggleEditMode}
     }
+    // localhost:8080/pin/NjQ=
 
     render() {
-        if (!this.props.pinId) {
+        if (!this.state.ready && !this.props.markersArray.length > 0) {
             return <div>not ready</div>;
         } else {
-            console.log(this.props.pinId);
             const shareButtons = () => {
                 return (
                     <div className="colPinClick">
@@ -162,18 +185,29 @@ class PinClick extends React.Component {
                         </a>*/}
                         <button
                             id="sharePin"
-                            className="subtleButton"
+                            className="pinAppButton"
                             onClick={() => {
-                                console.log("share is clicked");
                                 emit("sharePin", this.props.pinId);
                             }}
                         >
                             share
                         </button>
+                        <button
+                            className="subtleButton"
+                            onClick={this.exportPin}
+                        >
+                            export
+                        </button>
+                        {this.state.pinUrl && (
+                            <div className="copyUrl">
+                                Copy and send this URL to your friends:<p>
+                                    {this.state.pinUrl}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 );
             };
-            console.log("2");
             const deleteAlert = () => {
                 return (
                     <div className="blackVailDelete">
@@ -201,13 +235,23 @@ class PinClick extends React.Component {
                     </div>
                 );
             };
-            console.log("3", this.props.markersArray);
+            let currentPinInfo;
 
-            let currentPinInfo = this.props.markersArray.filter((item) => {
-                console.log("in filter", item.id, this.props.pinId);
-                return item.id == this.props.pinId;
-            });
-            console.log(currentPinInfo);
+            if (this.props.pinId) {
+                currentPinInfo = this.props.markersArray.filter((item) => {
+                    return item.id == this.props.pinId;
+                });
+            } else if (this.props.flag) {
+                currentPinInfo = this.props.markersArray.filter((item) => {
+                    return (
+                        item.id ==
+                        window.atob(this.props.match.params.encryptedPinId)
+                    );
+                });
+            } else {
+                currentPinInfo = [this.state];
+            }
+
             let imageUrl;
 
             if (currentPinInfo[0].url) {
@@ -216,7 +260,6 @@ class PinClick extends React.Component {
                 imageUrl = "/pins/greyPin.png";
             }
 
-            console.log("4");
             const edit = () => {
                 if (this.state.userId == this.props.id) {
                     return (
@@ -234,7 +277,12 @@ class PinClick extends React.Component {
                     return <div />;
                 }
             };
-            console.log("this.props", this.props);
+            let bigPin;
+            if (currentPinInfo[0]) {
+                bigPin = currentPinInfo[0].color || "/pins/bigPin.png";
+            } else {
+                bigPin = "/pins/bigPin.png";
+            }
 
             return (
                 <React.Fragment>
@@ -243,24 +291,65 @@ class PinClick extends React.Component {
                             className="blackVail"
                             onClick={this.props.togglePinClick}
                         />
-                        <p id="exit" onClick={this.props.togglePinClick}>
-                            X
-                        </p>
 
                         <div className="fieldsContainer fieldsContainerPinClick">
-                            <div className="pinTitle box">
-                                <h1>
-                                    <img src="/pins/bigPin.png" />
-                                    <span className="addPinTitle">
-                                        {currentPinInfo[0].title ||
-                                            "clicked pin"}
-                                    </span>
+                            <p
+                                className="exitPinClick"
+                                onClick={this.props.togglePinClick}
+                            >
+                                X
+                            </p>
+                            <div className="pinTitlePinClick">
+                                <img src={bigPin} />
+                                <h1 className="addPinTitle">
+                                    {currentPinInfo[0].title || "clicked pin!"}
                                 </h1>
                             </div>
                             <div className="secondRowPinClick">
-                                <div className="boxPinClick mapContainerPinClick">
-                                    {/*<div className="overlayPin"> lalala </div>*/}
-                                    <img src="/map.png" />
+                                <div className="boxPinClick">
+                                    <Map
+                                        style={{
+                                            width: "100%",
+                                            height: "100%"
+                                        }}
+                                        center={{
+                                            lat: this.props.lat || 52.4918854,
+                                            lng:
+                                                this.props.lng ||
+                                                13.360088699999999
+                                        }}
+                                        zoom={14}
+                                        google={this.props.google}
+                                        onReady={this.fetchPlaces}
+                                        visible={true}
+                                    >
+                                        {this.props.markersArray &&
+                                            currentPinInfo.map((item) => {
+                                                return (
+                                                    <Marker
+                                                        key={item.id}
+                                                        onClick={this.pinClick}
+                                                        name={item.id}
+                                                        position={{
+                                                            lat: item.lat,
+                                                            lng: item.lng
+                                                        }}
+                                                        icon={{
+                                                            url: item.color,
+                                                            anchor: new google.maps.Point(
+                                                                15,
+                                                                35
+                                                            ),
+                                                            scaledSize: new google.maps.Size(
+                                                                25,
+                                                                35
+                                                            )
+                                                        }}
+                                                    />
+                                                );
+                                            })}
+                                    </Map>
+                                    {/* <img src="/map.png" /> */}
                                 </div>
 
                                 <div className="boxPinClick">
@@ -355,7 +444,6 @@ class PinClick extends React.Component {
                                     {shareButtons()}
                                 </div>
                             )}
-
                             {/* *************************FOURTH ROW********************* */}
                             {this.state.editMode && (
                                 <div className="pinEditSaveButtonArea box">
@@ -368,7 +456,6 @@ class PinClick extends React.Component {
                                     </div>
                                     <div
                                         className="saveButton"
-
                                         onClick={this.toggleEditMode}
                                     >
                                         {" "}
@@ -388,11 +475,12 @@ class PinClick extends React.Component {
     }
 }
 const mapStateToProps = function(state) {
-    console.log("in mapStateToProps", state);
     return {
         markersArray: state.markersArray,
         pinInfo: state.pinInfo,
         userName: state.userName
     };
 };
-export default connect(mapStateToProps)(PinClick);
+export default GoogleApiWrapper({
+    apiKey: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
+})(connect(mapStateToProps)(PinClick));

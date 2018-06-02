@@ -3,24 +3,46 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "./axios";
+import PinClick from "./PinClick.js";
 class ListOfLocations extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { clickedPinId: null };
+        this.closeClickedPinList = this.closeClickedPinList.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            clickedPinId: null
+        });
+    }
+    closeClickedPinList() {
+        this.setState({
+            clickedPinId: null
+        });
     }
     render() {
+        console.log("this.props in list of locations", this.props);
         return (
             <React.Fragment>
+                {this.state.clickedPinId && (
+                    <PinClick
+                        pinId={this.state.clickedPinId}
+                        togglePinClick={this.closeClickedPinList}
+                        id={this.props.id}
+                    />
+                )}
                 <div className="listOfPinsContainer">
-                    <div className="blackVail" onClick={this.props.closeListCom}/>
+                    <div
+                        className="blackVail"
+                        onClick={this.props.closeListCom}
+                    />
                     <div className="listOfLocationsHolder">
                         <div id="listSmallHolder">
                             <p id="listClose" onClick={this.props.closeListCom}>
-                            X
+                                X
                             </p>
-                            <div className="pinAppStyle listTitle">
-                                My Pins
-                            </div>
+                            <div className="pinAppStyle listTitle">My Pins</div>
                             {this.props.markersArray &&
                                 this.props.markersArray.map((item) => {
                                     return (
@@ -31,14 +53,19 @@ class ListOfLocations extends React.Component {
                                                 />
                                             </div> */}
 
-                                                <img
-                                                    src={item.color}
-                                                    className="thePinImg"
-                                                />
-
-
+                                            <img
+                                                src={item.color}
+                                                className="thePinImg"
+                                                onClick={() => {
+                                                    this.setState({
+                                                        clickedPinId: item.id
+                                                    });
+                                                    this.props.closeListCom;
+                                                }}
+                                            />
+                                            <span className="titleHolder">
                                                 {item.title}
-
+                                            </span>
                                             {/*<div className="flexHolder categoryHolder">
                                                 {item.category}
                                             </div>*/}

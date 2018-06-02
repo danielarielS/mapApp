@@ -32,9 +32,13 @@ export class Navigation extends React.Component {
     }
     render() {
         let pic = this.props.profilepic || "/user.png";
+        const style = {
+            backgroundImage: `url(${pic})`
+        };
+
         return (
             <div className="navigationContainer">
-                <div className="navigationIconBar">
+                {/*<div className="navigationIconBar">*/}
                     <Link to="/map">
                         {" "}
                         <img
@@ -51,12 +55,8 @@ export class Navigation extends React.Component {
                             />{" "}
                         </Link>
                         <Link to="/editProfile"> </Link>
-                        <div className="navigationIconProfilepicCircle">
-                            <img
-                                src={pic}
-                                className="navigationIconProfilepic"
-                                onClick={this.toggleUserMenu}
-                            />
+                        <div className="navigationIconProfilepicCircle" style={style} onClick={this.toggleUserMenu}>
+
                         </div>
                         {this.state.userMenuIsVisible && (
                             <UserMenuPopUp
@@ -66,7 +66,7 @@ export class Navigation extends React.Component {
                                 userMenuIsVisible={this.state.userMenuIsVisible}
                             />
                         )}
-                    </div>
+                    {/*</div>*/}
                 </div>
             </div>
         );

@@ -23,7 +23,6 @@ export class ProfilePage extends React.Component {
         });
     }
     inputField(inputValue, state) {
-        console.log("lalala", name);
         return <div>I wonder...</div>;
     }
     changeInputValues(inputValues) {
@@ -44,7 +43,6 @@ export class ProfilePage extends React.Component {
             })
             .then((response) => {
                 if (response.data.user) {
-                    console.log("response.data.user", response.data.user);
                     this.props.changeInputValues(response.data.user);
                     setTimeout(this.toggleEditor, 300);
                 } else {
@@ -67,7 +65,6 @@ export class ProfilePage extends React.Component {
             .post("/updateProfilepic", formData)
             .then((response) => {
                 if (response.data.success) {
-                    console.log(response.data.profilepic);
                     this.props.changeImage(response.data.profilepic);
                     // this.props.changeImage(response.data.profilepic);
                 }
@@ -82,8 +79,7 @@ export class ProfilePage extends React.Component {
         let bio = this.props.bio || "Tell us something about urself!";
 
         const style = {
-            backgroundImage: `url(${pic})`,
-            backgroundSize: "cover"
+            backgroundImage: `url(${pic})`
         };
 
         const existingValue = (textToShow, propertyKey) => {
@@ -102,7 +98,7 @@ export class ProfilePage extends React.Component {
                         <input
                             id="first"
                             onChange={this.handleChange}
-                            className="inputField"
+                            className="inputPropertyValue"
                             name="first"
                             defaultValue={propertyKey}
                         />
@@ -112,110 +108,109 @@ export class ProfilePage extends React.Component {
         };
 
         return (
-            <div className="profilePageContainer">
-                <div className="profilePageContainerLeft">
-                    {/*<p>Welcome, {this.props.first}</p>*/}
-                    <div className="profilePicFrame">
-                        <div className="profilePicOwn">
-                            <div className="profilePicCircle" style={style}>
-                                {/*<img src={pic} />*/}
-                            </div>
-                            <input
-                                id="inputfile"
-                                className="profileHiddenInput"
-                                type="file"
-                                name="file"
-                                onChange={this.setFile}
-                                data-multiple-caption="{count} files selected"
-                                multiple
-                            />
-                            <label htmlFor="inputfile">
-                                <img
-                                    src="/editWhite.png"
-                                    className="icons editIcon"
+            <div className="componentContainer">
+                <div className="profilePageContainer">
+                    <div className="profilePageContainerLeft">
+                        {/*<p>Welcome, {this.props.first}</p>*/}
+                            <div className="profilePicOwn">
+                                <div className="profilePicCircle" style={style}>
+                                    {/*<img src={pic} />*/}
+                                </div>
+                                <input
+                                    id="inputfile"
+                                    className="profileHiddenInput"
+                                    type="file"
+                                    name="file"
+                                    onChange={this.setFile}
+                                    data-multiple-caption="{count} files selected"
+                                    multiple
                                 />
-                            </label>
-                        </div>
+                                <label htmlFor="inputfile">
+                                    <img
+                                        src="/editWhite.png"
+                                        className="icons editIcon"
+                                    />
+                                </label>
+                            </div>
                     </div>
-                </div>
-                <div className="profilePageContainerRight">
-                    <div className="profileInfoContainer">
-                        {(this.state.editorIsVisible && (
-                            <div className="editingValues">
-                                {inputField("Firstname", this.props.first)}
-                                {inputField("Lastname", this.props.last)}
-                                {inputField("Email", this.props.email)}
-                                <div className="profileInputField">
-                                    <div className="inputPropertyName">
-                                        {" "}
-                                        Password{" "}
+                    <div className="profilePageContainerRight">
+                        <div className="profileInfoContainer">
+                            {(this.state.editorIsVisible && (
+                                <div className="editingValues">
+                                    {inputField("Firstname", this.props.first)}
+                                    {inputField("Lastname", this.props.last)}
+                                    {inputField("Email", this.props.email)}
+                                    <div className="profileInputField">
+                                        <div className="inputPropertyName">
+                                            {" "}
+                                            Password{" "}
+                                        </div>
+                                        <div className="inputPropertyValue">
+                                            <input
+                                                id="pass"
+                                                onChange={this.handleChange}
+                                                className="inputPropertyValue"
+                                                name="pass"
+                                                placeholder="*******"
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="inputPropertyValue">
-                                        <input
-                                            id="pass"
-                                            onChange={this.handleChange}
-                                            className="inputField"
-                                            name="pass"
-                                            placeholder="*******"
-                                        />
+                                    <div className="profileInputField">
+                                        <div className="inputPropertyName">
+                                            {" "}
+                                            Bio{" "}
+                                        </div>
+                                        <div className="inputPropertyValue">
+                                            <textarea
+                                                id="bio"
+                                                onChange={this.handleChange}
+                                                className="inputPropertyValue editBioTextArea"
+                                                name="bio"
+                                                defaultValue={bio}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="editButtons">
+                                        <button
+                                            className="subtleButton"
+                                            onClick={this.saveNewInputValue}
+                                        >
+                                            Save
+                                        </button>
+                                        <button
+                                            className="subtleButton"
+                                            onClick={this.toggleEditor}
+                                        >
+                                            Cancel
+                                        </button>
                                     </div>
                                 </div>
-                                <div className="profileInputField">
-                                    <div className="inputPropertyName">
-                                        {" "}
-                                        Bio{" "}
+                            )) || (
+                                <div className="existingValues">
+                                    {existingValue("Firstname", this.props.first)}
+                                    {existingValue("Lastname", this.props.last)}
+                                    {existingValue("Email", this.props.email)}
+                                    {existingValue("Password", "*******")}
+                                    <div className="profileInputField">
+                                        <div className="inputPropertyName">Bio</div>
+                                        <div
+                                            className="inputPropertyValue"
+                                            style={{
+                                                paddingBottom: 20 + "px"
+                                            }}
+                                        >
+                                            {bio}
+                                        </div>
                                     </div>
-                                    <div className="inputPropertyValue">
-                                        <textarea
-                                            id="bio"
-                                            onChange={this.handleChange}
-                                            className="inputField editBioTextArea"
-                                            name="bio"
-                                            defaultValue={bio}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="editButtons">
-                                    <button
-                                        className="subtleButton"
-                                        onClick={this.saveNewInputValue}
-                                    >
-                                        Save
-                                    </button>
                                     <button
                                         className="subtleButton"
                                         onClick={this.toggleEditor}
                                     >
-                                        Cancel
+                                        Edit
                                     </button>
                                 </div>
-                            </div>
-                        )) || (
-                            <div className="existingValues">
-                                {existingValue("Firstname", this.props.first)}
-                                {existingValue("Lastname", this.props.last)}
-                                {existingValue("Email", this.props.email)}
-                                {existingValue("Password", "*******")}
-                                <div className="profileInputField">
-                                    <div className="inputPropertyName">Bio</div>
-                                    <div
-                                        className="inputPropertyValue"
-                                        style={{
-                                            width: 130 + "px",
-                                            paddingBottom: 20 + "px"
-                                        }}
-                                    >
-                                        {bio}
-                                    </div>
-                                </div>
-                                <button
-                                    className="subtleButton"
-                                    onClick={this.toggleEditor}
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

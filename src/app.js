@@ -13,6 +13,8 @@ import OnlineUsers from "./onlineUsers";
 import Chat from "./chat";
 import MapContainer from "./mapcontainer";
 import { saveUserInfo } from "./actions";
+import PinClick from "./PinClick.js";
+
 // import { EditBio , ExistingBio } from './bio';
 
 class App extends React.Component {
@@ -26,8 +28,12 @@ class App extends React.Component {
         this.fileToUpload = {};
         this.state.toggleUploader = false;
         this.changeInputValues = this.changeInputValues.bind(this);
+        this.togglePinClick = this.togglePinClick.bind(this);
     }
-
+    togglePinClick() {
+        console.log("go to the park");
+        location.replace("/");
+    }
     toggleUploader() {
         this.setState({
             toggleUploader: !this.state.toggleUploader
@@ -39,14 +45,12 @@ class App extends React.Component {
     //     });
     // }
     changeImage(img) {
-        console.log(img);
         this.setState({
             profilepic: img
         });
     }
 
     changeInputValues(inputValues) {
-        console.log("changeinputvalues...", inputValues);
         let { id, first, last, email, bio } = inputValues;
         this.setState({
             id,
@@ -58,13 +62,13 @@ class App extends React.Component {
     }
 
     hideUploader() {
-        console.log("hiding uploader...");
         this.setState({
             uploaderIsVisible: false
         });
     }
 
     componentDidMount() {
+        console.log("app mounted");
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({
                 lat: position.coords.latitude,
@@ -74,6 +78,7 @@ class App extends React.Component {
         axios.get("/getUser").then((response) => {
             if (response.data.success) {
                 this.props.dispatch(saveUserInfo(response.data.user));
+
                 this.setState(response.data.user);
             } else {
                 console.log(
@@ -118,6 +123,7 @@ class App extends React.Component {
                             exact
                             path="/user/:id"
                             render={(x) => (
+                                <React.Fragment>
                                 <OtherProfilePage
                                     lat={this.state.lat}
                                     lng={this.state.lng}
@@ -125,9 +131,21 @@ class App extends React.Component {
                                     history={x.history}
                                     id={this.state.id}
                                 />
+                                </React.Fragment>
                             )}
                         />
-
+                        <Route
+                            exact
+                            path="/pin/:encryptedPinId"
+                            render={(x) => (
+                                <PinClick
+                                    match={x.match}
+                                    history={x.history}
+                                    togglePinClick={this.togglePinClick}
+                                    flag={true}
+                                />
+                            )}
+                        />
                         <Route
                             exact
                             path="/onlineUsers"
@@ -160,7 +178,7 @@ class App extends React.Component {
                         />
                     </div>
                 </BrowserRouter>
-                {/*<UserMenu />*/}
+
                 {this.state.toggleUploader && (
                     <UploadProfilePic
                         changeImage={this.changeImage}

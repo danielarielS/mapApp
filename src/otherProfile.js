@@ -7,7 +7,7 @@ import { Logo, Login } from "./welcome";
 import { FriendButton } from "./friendButton";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import { getPinInfo, getUserPinInfo, selectActionBycategory } from "./actions";
-
+import ListOfLocations from "./ListOfLocations.js";
 import PinClick from "./PinClick.js";
 
 class OtherProfilePage extends React.Component {
@@ -33,6 +33,8 @@ class OtherProfilePage extends React.Component {
         this.checkValue = this.checkValue.bind(this);
         this.pinClick = this.pinClick.bind(this);
         this.togglePinClick = this.togglePinClick.bind(this);
+        this.showListComponent = this.showListComponent.bind(this);
+        this.closeListCom = this.closeListCom.bind(this);
     }
     pinClick(e) {
         this.clickedPinId = e.name;
@@ -64,10 +66,19 @@ class OtherProfilePage extends React.Component {
             )
         );
     }
-
-    componentDidMount() {
+    showListComponent() {
+        this.setState({
+            showListComponent: true
+        });
+    }
+    closeListCom(e) {
+        this.setState({
+            showListComponent: false
+        });
+    }
+    whatToDoOnLoad(id) {
         axios
-            .get(`/getUser/${this.props.match.params.id}`)
+            .get(`/getUser/${id}`)
             .then((response) => {
                 this.setState({ user: response.data.user });
             })
@@ -89,14 +100,26 @@ class OtherProfilePage extends React.Component {
 
         this.props.dispatch(getUserPinInfo(this.props.match.params.id));
     }
+    // componentWillReceiveProps(nextProps) {
+    //     if (
+    //         nextProps.history.location.pathname !== this.props.match.params.id
+    //     ) {
+    //         console.log("look its fire");
+    //         this.whatToDoOnLoad(nextProps.match.params.id);
+    //         return;
+    //     }
+    //     console.log(nextProps);
+    //     console.log(this.props.match.params.id);
+    //     return;
+    // }
+    componentDidMount() {
+        this.whatToDoOnLoad(this.props.match.params.id);
+    }
 
     render() {
         if (!this.state.user) {
             return <h1>no such user found</h1>;
         }
-        // if (!this.props.lat) {
-        //     return <img src="/monky.gif" />;
-        // }
         const style = {
             backgroundSize: "contain",
             backgroundColor: "pink",
@@ -117,11 +140,17 @@ class OtherProfilePage extends React.Component {
                         onClick={myFunction}
                     />
                     <img src={str} className="categoryItemPinIcon" />
-                    <label htmlFor="museums" className="pinText"> {text} </label>
+                    <label htmlFor="museums" className="pinText">
+                        {" "}
+                        {text}{" "}
+                    </label>
                 </div>
             );
         };
-        const userAvatar = this.state.user.profilepic || "/user.png"
+        const userAvatar = this.state.user.profilepic || "/user.png";
+        const profilePicStyle = {
+            backgroundImage: `url(${userAvatar})`
+        };
         // {this.state.user.profilepic && (
         //     <img src={this.state.user.profilepic} />
         // )}
@@ -130,6 +159,13 @@ class OtherProfilePage extends React.Component {
         // )}
         return (
             <React.Fragment>
+                {this.state.showListComponent && (
+                    <ListOfLocations
+                        closeListCom={this.closeListCom}
+                        id={this.props.id}
+                        togglePinClick={this.togglePinClick}
+                    />
+                )}
                 {this.state.pinClickVisible &&
                     this.state.clickedPinId && (
                         <PinClick
@@ -138,79 +174,78 @@ class OtherProfilePage extends React.Component {
                             id={this.props.id}
                         />
                     )}
-                <div className="profileContainerUser">
-                    <div className="infoContainerUser">
-                        <div className="centerStuff">
-                            <div className="profilePicUser"
-                            >
-                            <img src = {userAvatar}/>
-                                {/*{this.state.user.profilepic && (
-                                    <img src={this.state.user.profilepic} />
-                                )}
-                                {!this.state.user.profilepic && (
-                                    <img src={"/user.png"} />
-                                )}*/}
+                <div className="componentContainer">
+                    <div className="otherUserContainer">
+                        <div className="otherUserContainerLeft">
+                            <div className="otherUserContainerLeftUp">
+                                <div
+                                    className="profilePicUser"
+                                    style={profilePicStyle}
+                                />
+                                <div className="nameAndBioContainerUser">
+                                    <div className="nameUser">
+                                        {this.state.user.first}{" "}
+                                        {this.state.user.last}
+                                    </div>
+                                    <div className="bioUser">
+                                        {this.state.user.bio}
+                                    </div>
+                                </div>
                             </div>
-                            <div className="centerStuff">
+
+                            <div className="otherUserContainerLeftMiddle">
                                 <FriendButton
                                     otherId={this.props.match.params.id}
                                 />
-                                {/* <button> Send Msg</button> */}
+                            </div>
+                            <div className="otherUserContainerLeftDown">
+                                <div className="categoryListUser">
+                                    <form id="myForm">
+                                        {categoryItems(
+                                            "blue",
+                                            "museums",
+                                            "museums",
+                                            this.checkValue
+                                        )}
+                                        {categoryItems(
+                                            "green",
+                                            "Parks",
+                                            "parks",
+                                            this.checkValue
+                                        )}
+                                        {categoryItems(
+                                            "yellow",
+                                            "restaurants",
+                                            "restaurants",
+                                            this.checkValue
+                                        )}
+                                        {categoryItems(
+                                            "pink",
+                                            "bars",
+                                            "bars",
+                                            this.checkValue
+                                        )}
+                                        {categoryItems(
+                                            "purple",
+                                            "sightseeing",
+                                            "sightseeing",
+                                            this.checkValue
+                                        )}
+                                    </form>
+                                </div>
+                                <button
+                                    className="pinAppButton"
+                                    onClick={() => {
+                                        this.showListComponent;
+                                    }}
+                                >
+                                    {" "}
+                                    List of Pins{" "}
+                                </button>
                             </div>
                         </div>
-                        <div className="nameAndBioContainerUser">
-                            <div className="nameUser">
-                                {this.state.user.first} {this.state.user.last}
-                            </div>
-                            <div className="bioUser">{this.state.user.bio}</div>
-                        </div>
 
-                    </div>
-
-                    <div className="mapContainerUser">
-                        <div className="mapContainerUserLeft">
-                            <div className="categoryListUser">
-                                <form id="myForm">
-                                    {categoryItems(
-                                        "blue",
-                                        "museums",
-                                        "museums",
-                                        this.checkValue
-                                    )}
-                                    {categoryItems(
-                                        "green",
-                                        "Parks",
-                                        "parks",
-                                        this.checkValue
-                                    )}
-                                    {categoryItems(
-                                        "yellow",
-                                        "restaurants",
-                                        "restaurants",
-                                        this.checkValue
-                                    )}
-                                    {categoryItems(
-                                        "pink",
-                                        "bars",
-                                        "bars",
-                                        this.checkValue
-                                    )}
-                                    {categoryItems(
-                                        "purple",
-                                        "sightseeing",
-                                        "sightseeing",
-                                        this.checkValue
-                                    )}
-                                </form>
-
-                                {/*<button onClick={this.toggleSelectCategory}>categories</button>
-                            <button onClick={this.watchMyLocation}>show my location</button>
-                            <button onClick={this.toggleAddMyPinLocationVisible}>
-                                drop pin
-                            </button>*/}
-                            </div>
-                        </div>
-                        <div className="mapContainerUserRight">
+                        <div className="otherUserContainerRight">
                             <div className="mapAreaUser">
                                 <Map
                                     style={style}

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { insertPinInfo } from "./actions";
 
-
 class AddNewPin extends React.Component {
     constructor(props) {
         super(props);
@@ -119,8 +118,7 @@ class AddNewPin extends React.Component {
         //     return item.id == this.props.pinId;
         // });
         // let imageUrl;
-        // console.log("currentPinInfo",currentPinInfo);
-        // console.log("this.props",this.props);
+
         // if (currentPinInfo[0].url) {
         //     // imageUrl = currentPinInfo[0].url;
         // } else {
@@ -130,66 +128,79 @@ class AddNewPin extends React.Component {
         return (
             <React.Fragment>
                 <div className="newPinContainer">
-                    <div className="blackVail"
-                    onClick={this.props.closeAddNewPinComponent}
+                    <div
+                        className="blackVail"
+                        onClick={this.props.closeAddNewPinComponent}
                     />
                     <p id="exit" onClick={this.props.closeAddNewPinComponent}>
                         X
                     </p>
                     <div className="fieldsContainer fieldsContainerNewPin">
                         <div className="pinTitle box">
-                            <div>
-                                <img src="/pins/bigPin.png" />
-                                <span className="addPinTitle pinTitle"> New Pin</span>
-                            </div>
+                            <img src="/pins/bigPin.png" />
+                            <span className="addPinTitle pinTitle"> New Pin</span>
                         </div>
                         <div className="pinOptions">
                             <div className="pinMenu">
                                 <form>
                                     {category("blue", "Museum", "museums")}
                                     {category("green", "Park", "parks")}
-                                    {category( "yellow", "Restaurant", "restaurants" )}
+                                    {category(
+                                        "yellow",
+                                        "Restaurant",
+                                        "restaurants"
+                                    )}
                                     {category("pink", "Bar", "bars")}
-                                    {category( "purple", "Sightseeing", "sightseeing")}
+                                    {category(
+                                        "purple",
+                                        "Sightseeing",
+                                        "sightseeing"
+                                    )}
                                 </form>
                             </div>
                             <div className="addPinPicture">
-                                {!this.state.dataUrl
-                                    &&(
-                                        <div className="cameraIconContainer" >
-                                            <input
-                                                id="inputfile"
-                                                className="inputfile"
-                                                type="file"
-                                                name="file"
-                                                onChange={this.setFile}
-                                                onChange={this.compileData}
-                                                data-multiple-caption="{count} files selected"
-                                                multiple
+                                {(!this.state.dataUrl && (
+                                    <div className="cameraIconContainer">
+                                        <input
+                                            id="inputfile"
+                                            className="inputfile"
+                                            type="file"
+                                            name="file"
+                                            onChange={this.setFile}
+                                            onChange={this.compileData}
+                                            data-multiple-caption="{count} files selected"
+                                            multiple
+                                        />
+                                        <label htmlFor="inputfile">
+                                            <img
+                                                src="/pins/camera.png"
+                                                className="cameraIcon"
                                             />
-                                            <label htmlFor="inputfile">
-                                                <img src="/pins/camera.png" className="cameraIcon" />
-                                            </label>
-                                        </div>
-                                    )
-                                    ||(
-                                        <div className="cameraIconContainer" style={{
-                                            backgroundColor:"black"}} >
-                                            <div
-                                                style={{
-                                                    width:"100%",
-                                                    height:"100%",
-                                                    backgroundImage:`url(${this.state.dataUrl})`,
-                                                    backgroundRepeat: "no-repeat",
-                                                    backgroundPosition:"center center",
-                                                    backgroundSize:"contain",
-                                                    zIndex:"50"
-                                                }}
-                                            >
-                                            </div>
-                                        </div>
-                                        )}
-
+                                        </label>
+                                    </div>
+                                )) || (
+                                    <div
+                                        className="cameraIconContainer"
+                                        style={{
+                                            backgroundColor: "black"
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                backgroundImage: `url(${
+                                                    this.state.dataUrl
+                                                })`,
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundPosition:
+                                                    "center center",
+                                                backgroundSize: "contain",
+                                                zIndex: "50"
+                                            }}
+                                        />
+                                    </div>
+                                )}
 
                                 <textarea
                                     placeholder="Title"

@@ -5,12 +5,9 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 class Chat extends React.Component {
-    componentDidMount() {
-        console.log("chat m,ounted");
-    }
+    componentDidMount() {}
 
     render() {
-        // console.log('exist, pending...', pendingFriends, existingFriends);
         return (
             <div className="chatComponent">
                 <h1> Welcome to chat </h1>
@@ -35,7 +32,6 @@ class Chat extends React.Component {
 }
 
 const mapStateToProps = function(state) {
-    // console.log('state!!!',state.friends);
     return {
         // friends: state.friends && state.friends.filter(friends => friends),
         // existingFriends:

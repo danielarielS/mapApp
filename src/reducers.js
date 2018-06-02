@@ -84,7 +84,6 @@ export default function reducer(state = { markersArray: [] }, action) {
         };
     }
     if (action.type == "GET_USER_PIN_INFO") {
-        console.log("REDUCER:action in GET_USER_PIN_INFO");
         state = {
             ...state,
             markersArray: [...action.pinsArray]
@@ -105,7 +104,6 @@ export default function reducer(state = { markersArray: [] }, action) {
         };
     }
     if (action.type == "UPDATE_PIN") {
-        console.log("in the reducer", action.pinInfo);
         state = {
             ...state,
             markersArray: state.markersArray.map((marker) => {
@@ -129,7 +127,6 @@ export default function reducer(state = { markersArray: [] }, action) {
         };
     }
     if (action.type == "SHARE_PIN") {
-        console.log("from the reducer", state, action.pinInfo);
         state = {
             ...state,
             pinInfo: action.pinInfo.data,

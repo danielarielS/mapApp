@@ -10,11 +10,9 @@ export function init(store) {
             store.dispatch(onlineUsers(data));
         });
         socket.on("userJoined", function(data) {
-            console.log("socket data", data);
             store.dispatch(userJoined(data));
         });
         socket.on("userLeft", function(data) {
-            console.log("data inside socket", data);
             store.dispatch(userLeft(data));
         });
 
@@ -26,7 +24,6 @@ export function init(store) {
             store.dispatch(mostRecentTenMessages(data));
         }); //this happens when user comes online
         socket.on("sharePin", (pinInfo) => {
-            console.log("in socket", pinInfo);
             store.dispatch(newPinToView(pinInfo));
         });
     }
